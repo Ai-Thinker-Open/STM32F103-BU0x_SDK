@@ -1,0 +1,4 @@
+---- tag_output_pc Matches (3 in 1 files) ----
+node.c (Components\HAL\DW\dw_twr) line 62 : void  tag_output_pc(result_t *pRes, uint16_t tagAddr16)
+ALL_Data in node.c (Components\HAL\DW\dw_twr) : //	tag_output_pc(pTwrInfo, TG_ID);
+twr_uwb_process in node.c (Components\HAL\DW\dw_twr) : 						tag_output_pc(pRes, pTwrInfo);
