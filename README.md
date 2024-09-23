@@ -8,7 +8,7 @@ BU03-Kit 是由深圳市安信可科技有限公司开发的一款 UWB 开发板
 
 ## **温馨提示：** BU03_BU04_OPEN 只适用于安信可BU03或BU04系列模组或开发板
 
-# SDK 架构
+# 芯片架构
 
 ![alt text](doc/img/chip.png)
 
