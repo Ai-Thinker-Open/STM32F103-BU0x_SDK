@@ -337,7 +337,7 @@
               <MiscControls>--c99</MiscControls>
               <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../USER;../LIB/inc;../CMSIS;../../Components/HAL;../../Components/APP;../../Components/HAL/USB/src;../../Components/HAL/USB/lib;../../Components/HAL/DW/decadriver;../../Components/Main;../../Components/HAL/DW/dw_twr/examples/ex_00a_reading_dev_id;../../Components/HAL/DW/dw_twr/examples/ex_01a_simple_tx;../../Components/HAL/DW/dw_twr/examples/ex_00a_reading_dev_id;../../Components/HAL/DW/dw_twr/examples/ex_01b_tx_sleep;../../Components/HAL/DW/dw_twr/examples/ex_01c_tx_sleep_auto;../../Components/HAL/DW/dw_twr/examples/eex_01d_tx_timed_sleep;../../Components/HAL/DW/dw_twr/examples/ex_01e_tx_with_cca;../../Components/HAL/DW/dw_twr/examples/ex_01g_simple_tx_sts_sdc;../../Components/HAL/DW/dw_twr/examples/ex_01h_simple_tx_pdoa;../../Components/HAL/DW/dw_twr/examples/ex_01i_simple_tx_aes;../../Components/HAL/DW/dw_twr/examples/ex_01c_tx_sleep_auto;../../Components/HAL/DW/dw_twr/examples/ex_02a_simple_rx;../../Components/HAL/DW/dw_twr/examples/ex_02c_rx_diagnostics;../../Components/HAL/DW/dw_twr/examples/ex_02d_rx_sniff;../../Components/HAL/DW/dw_twr/examples/ex_02f_rx_with_crystal_trim;../../Components/HAL/DW/dw_twr/examples/ex_02g_simple_rx_sts_sdc;../../Components/HAL/DW/dw_twr/examples/ex_02h_simple_rx_pdoa;../../Components/HAL/DW/dw_twr/examples/ex_02i_simple_rx_aes;../../Components/HAL/DW/dw_twr/examples/ex_03a_tx_wait_resp;../../Components/HAL/DW/dw_twr/examples/ex_03b_rx_send_resp;../../Components/HAL/DW/dw_twr/examples/ex_03d_tx_wait_resp_interrupts;../../Components/HAL/DW/dw_twr/examples/ex_04a_cont_wave;../../Components/HAL/DW/dw_twr/examples/ex_04b_cont_frame;../../Components/HAL/DW/dw_twr/examples/ex_05a_ds_twr_init;../../Components/HAL/DW/dw_twr/examples/ex_05b_ds_twr_resp;../../Components/HAL/DW/dw_twr/examples/ex_05c_ds_twr_init_sts_sdc;../../Components/HAL/DW/dw_twr/examples/ex_05d_ds_twr_resp_sts_sdc;../../Components/HAL/DW/dw_twr/examples/ex_06a_ss_twr_initiator;../../Components/HAL/DW/dw_twr/examples/ex_06b_ss_twr_responder;../../Components/HAL/DW/dw_twr/examples/ex_06e_AES_ss_twr_initiator;../../Components/HAL/DW/dw_twr/examples/ex_06f_AES_ss_twr_responder;../../Components/HAL/DW/dw_twr/examples/ex_07a_ack_data_tx;../../Components/HAL/DW/dw_twr/examples/ex_07b_ack_data_rx;../../Components/HAL/DW/dw_twr/examples/ex_07c_ack_data_rx_dbl_buff;../../Components/HAL/DW/dw_twr/examples/ex_11a_spi_crc;../../Components/HAL/DW/dw_twr/examples/ex_13a_gpio;../../Components/HAL/DW/dw_twr/examples/ex_14_otp_write;../../Components/HAL/DW/dw_twr/examples/ex_15_le_pend;../../Components/HAL/DW/dw_twr/examples/examples_info;../../Components/HAL/DW/dw_twr/examples/shared_data;../../Components/HAL/OLED;..\..\Components\HAL\LIS2DH12;..\..\Components\HAL\HAL;..\..\Components\HAL\DW\twr_pdoa\inc;..\..\Components\HAL\DW\twr_pdoa\lib</IncludePath>
+              <IncludePath>../USER;../LIB/inc;../CMSIS;../../Components/HAL;../../Components/APP;../../Components/HAL/USB/src;../../Components/HAL/USB/lib;../../Components/HAL/DW/decadriver;../../Components/Main;../../Components/HAL/OLED;..\..\Components\HAL\LIS2DH12;..\..\Components\HAL\HAL;..\..\Components\HAL\DW\twr_pdoa\inc;..\..\Components\HAL\DW\twr_pdoa\lib;..\..\Components\Examples\examples\ex_00a_reading_dev_id;..\..\Components\Examples\examples\ex_01a_simple_tx;..\..\Components\Examples\examples\ex_01d_tx_timed_sleep;..\..\Components\Examples\examples\ex_01h_simple_tx_pdoa;..\..\Components\Examples\examples\ex_02a_simple_rx;..\..\Components\Examples\examples\ex_02h_simple_rx_pdoa;..\..\Components\Examples\examples\ex_03a_tx_wait_resp;..\..\Components\Examples\examples\ex_03b_rx_send_resp;..\..\Components\Examples\examples\ex_03d_tx_wait_resp_interrupts;..\..\Components\Examples\examples\examples_info;..\..\Components\Examples\examples\ex_05c_ds_twr_init_sts_sdc;..\..\Components\Examples\examples\ex_05d_ds_twr_resp_sts_sdc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -605,6 +605,71 @@
               <FileName>stm32f10x_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Components\Main\stm32f10x_it.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Example</GroupName>
+          <Files>
+            <File>
+              <FileName>read_dev_id.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_00a_reading_dev_id\read_dev_id.c</FilePath>
+            </File>
+            <File>
+              <FileName>simple_tx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_01a_simple_tx\simple_tx.c</FilePath>
+            </File>
+            <File>
+              <FileName>tx_timed_sleep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_01d_tx_timed_sleep\tx_timed_sleep.c</FilePath>
+            </File>
+            <File>
+              <FileName>simple_tx_pdoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_01h_simple_tx_pdoa\simple_tx_pdoa.c</FilePath>
+            </File>
+            <File>
+              <FileName>simple_rx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_02a_simple_rx\simple_rx.c</FilePath>
+            </File>
+            <File>
+              <FileName>simple_rx_pdoa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_02h_simple_rx_pdoa\simple_rx_pdoa.c</FilePath>
+            </File>
+            <File>
+              <FileName>tx_wait_resp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_03a_tx_wait_resp\tx_wait_resp.c</FilePath>
+            </File>
+            <File>
+              <FileName>rx_send_resp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_03b_rx_send_resp\rx_send_resp.c</FilePath>
+            </File>
+            <File>
+              <FileName>tx_wait_resp_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_03d_tx_wait_resp_interrupts\tx_wait_resp_int.c</FilePath>
+            </File>
+            <File>
+              <FileName>example_info.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\examples_info\example_info.c</FilePath>
+            </File>
+            <File>
+              <FileName>ds_twr_sts_sdc_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_05c_ds_twr_init_sts_sdc\ds_twr_sts_sdc_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>ds_twr_sts_sdc_resp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Components\Examples\examples\ex_05d_ds_twr_resp_sts_sdc\ds_twr_sts_sdc_resp.c</FilePath>
             </File>
           </Files>
         </Group>

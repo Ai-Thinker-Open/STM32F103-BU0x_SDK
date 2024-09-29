@@ -21,6 +21,7 @@ BU03-Kit 是由深圳市安信可科技有限公司开发的一款 UWB 开发板
 | doc                | 直到文档和图片     | /    |
 | components/hal     | 驱动库            | / |
 | components/main    | 入口函数          | /   |
+| components/Examples | 示例例程 | / |
 | projects           | 工程文档          | / |
 
 
@@ -38,7 +39,7 @@ Keil MDK（Microcontroller Development Kit）是一个用于开发基于 ARM Cor
 
 Keil MDK 安装完成后，用户将获得一个功能齐全的集成开发环境（IDE），用于开发基于 ARM Cortex-M 微控制器的嵌入式应用程序。
 
-![alt text](doc/img/keilfinish.png)
+![image-20240929100512603](doc/img/image-20240929100512603.png)
 
 
 ## stm32f1 keil扩展包 下载
@@ -70,11 +71,12 @@ git clone https://gitee.com/Ai-Thinker-Open/Ai-BS21_SDK.git
     找到拉下来的工程，在\Projects\USER目录下面找到Project.uvprojx文件双击打开工程
 
 ![alt text](doc/img/keilopen.png)
+
 ## SDK 编译
 
     点击keil界面的编译按钮对工程进行编译
 
-![alt text](doc/img/keilbuild.png)
+![](doc/img/projectbuild.png)
 
 ## 程序烧录
 

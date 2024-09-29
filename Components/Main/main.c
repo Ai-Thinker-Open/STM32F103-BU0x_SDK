@@ -18,6 +18,7 @@
 
 #include "shared_functions.h"
 #include "user_out.h"
+#include "examples_defines.h"
 
 /*******************************************************************************
 *******************************************************************************/
@@ -155,9 +156,11 @@ void nt_task (void)
 int main (void)
 {
     init();
-
-    nt_task();
-
+#if(EXAMPLE_DEMO)
+    build_examples();
+#else
+		nt_task();
+#endif
     for (;;)
     {
     }
