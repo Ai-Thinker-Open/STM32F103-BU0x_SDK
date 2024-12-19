@@ -58,13 +58,13 @@ STM32F1的Keil扩展包安装是STM32微控制器开发过程中的一个重要�
 ### Github
 
 ```
-git clone https://github.com/Ai-Thinker-Open/Ai-BS21_SDK.git
+git clone https://github.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
 ```
 
 ### Gitee
 
 ```
-git clone https://gitee.com/Ai-Thinker-Open/Ai-BS21_SDK.git
+git clone https://gitee.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
 ```
 
 ## SDK 打开
