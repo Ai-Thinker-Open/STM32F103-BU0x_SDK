@@ -8,6 +8,8 @@ BU03-Kit 是由深圳市安信可科技有限公司开发的一款 UWB 开发板
 
 ## **温馨提示：** STM32F103-BU0x_SDK 只适用于安信可BU03或BU04系列模组或开发板
 
+### 更多教程请参考：[UWB 使用指南](https://fcniufr8ibx1.feishu.cn/wiki/space/7454451041846034460?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)
+
 # 芯片架构
 
 ![alt text](doc/img/chip.png)
@@ -24,7 +26,6 @@ BU03-Kit 是由深圳市安信可科技有限公司开发的一款 UWB 开发板
 | components/Examples | 示例例程 | / |
 | projects           | 工程文档          | / |
 
-
 # 环境搭建
 
 使用Windows平台来搭建开发环境。
@@ -39,8 +40,7 @@ Keil MDK（Microcontroller Development Kit）是一个用于开发基于 ARM Cor
 
 Keil MDK 安装完成后，用户将获得一个功能齐全的集成开发环境（IDE），用于开发基于 ARM Cortex-M 微控制器的嵌入式应用程序。
 
-![image-20240929100512603](doc/img/image-20240929100512603.png)
-
+![](doc/img/keil_v5.PNG)
 
 ## stm32f1 keil扩展包 下载
 
@@ -51,7 +51,6 @@ STM32F1 Keil 扩展包是用于支持 STM32F1 系列微控制器的 Keil MDK 软
 ## stm32f1 keil扩展包 安装
 
 STM32F1的Keil扩展包安装是STM32微控制器开发过程中的一个重要步骤，它允许开发者在Keil MDK-ARM这一集成开发环境（IDE）中方便地开发、编译和调试基于STM32F1系列微控制器的应用程序。
-
 
 ## SDK 克隆
 
@@ -68,15 +67,29 @@ git clone https://gitee.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
 ```
 
 ## SDK 打开
-    找到拉下来的工程，在\Projects\USER目录下面找到Project.uvprojx文件双击打开工程
+
+找到拉下来的工程，在\Projects\USER目录下面找到Project.uvprojx文件双击打开工程
 
 ![alt text](doc/img/keilopen.png)
 
 ## SDK 编译
 
-    点击keil界面的编译按钮对工程进行编译
+点击下图中的 **第2个**按钮 `Rebuil` 重新编译即可。
 
-![](doc/img/projectbuild.png)
+![!\[\](doc/img/projectbuild.png)](doc/img/keilbuild.png)
+
+### 编译成功示例
+
+```
+... other log
+compiling stm32f10x_tim.c...
+compiling stm32f10x_wwdg.c...
+compiling system_stm32f10x.c...
+linking...
+Program Size: Code=65980 RO-data=4304 RW-data=5196 ZI-data=7596  
+FromELF: creating hex file...
+".\Output\Project.axf" - 0 Error(s), 0 Warning(s).
+```
 
 ## 程序烧录
 
@@ -118,3 +131,9 @@ git clone https://gitee.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
     烧录
 
 ![alt text](doc/img/jflashprogram.png)
+
+# 常见问题
+
+## 编译失败
+
+可能会出现编译失败问题，目前主要原因为芯片型号选择错误，请选择正确的芯片型号，固定型号为：STM32F103CB
