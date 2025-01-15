@@ -91,6 +91,28 @@ FromELF: creating hex file...
 ".\Output\Project.axf" - 0 Error(s), 0 Warning(s).
 ```
 
+### 编译报错 ArmClang: error: unsupported option '--c99'
+
+错误原因是当前软件版本不支持C99编译器。
+
+解决办法：Keil主界面点击魔术棒对话框中选择Target,右侧ARM Compiler发现当前版本是6，将版本更改为5，再次编译就不会出现C99错误了
+![alt text](doc/img/keildebug-0.png)
+
+#### 【自行添加AC5(ARMCC)编译器】
+解压ARMCC（即MDK5.36）到Keil_v5\ARM目录下
+
+（MDK5.36难以下载 已上传到本仓库）
+![alt text](doc/img/keildebug-3.png)
+点击Manage Project Items
+![alt text](doc/img/keildebug-1.png)
+在Folders/Extensions标签下，点击右侧省略号添加之前复制的ARMCC文件夹，这样子以来我们的MDK5.37就有Arm Compiler 5了
+![alt text](doc/img/keildebug-2.png)
+
+#### 【Keil MDK 540版本安装出现unknown compiler编译错误解决办法】
+原因：arm在这个CMSIS上故意加上了版本号的限制，直接导致v5.06无法使用。
+解决办法：卸载掉CMSIS的v6.1.0版本，再编译工程即可
+![alt text](doc/img/keildebug-4.png)
+
 ## 程序烧录
 
     程序烧录有多种方式，比如：keil烧录、ST link烧录、j-flash烧录等等等。这里选用j-flash烧录介绍。
