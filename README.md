@@ -8,6 +8,8 @@ BU03-Kit 是由深圳市安信可科技有限公司开发的一款 UWB 开发板
 
 ## **温馨提示：** STM32F103-BU0x_SDK 只适用于安信可BU03或BU04系列模组或开发板
 
+### 更多教程请参考：[UWB 使用指南](https://fcniufr8ibx1.feishu.cn/wiki/space/7454451041846034460?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)
+
 # 芯片架构
 
 ![alt text](doc/img/chip.png)
@@ -67,6 +69,7 @@ git clone https://gitee.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
 ## SDK 打开
 
 找到拉下来的工程，在\Projects\USER目录下面找到Project.uvprojx文件双击打开工程
+
 ![alt text](doc/img/keilopen.png)
 
 ## SDK 编译
