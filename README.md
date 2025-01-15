@@ -66,15 +66,27 @@ git clone https://gitee.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
 
 ## SDK 打开
 
-    找到拉下来的工程，在\Projects\USER目录下面找到Project.uvprojx文件双击打开工程
-
+找到拉下来的工程，在\Projects\USER目录下面找到Project.uvprojx文件双击打开工程
 ![alt text](doc/img/keilopen.png)
 
 ## SDK 编译
 
-    点击keil界面的编译按钮对工程进行编译
+点击下图中的 **第2个**按钮 `Rebuil` 重新编译即可。
 
-![](doc/img/projectbuild.png)
+![!\[\](doc/img/projectbuild.png)](doc/img/keilbuild.png)
+
+### 编译成功示例
+
+```
+... other log
+compiling stm32f10x_tim.c...
+compiling stm32f10x_wwdg.c...
+compiling system_stm32f10x.c...
+linking...
+Program Size: Code=65980 RO-data=4304 RW-data=5196 ZI-data=7596  
+FromELF: creating hex file...
+".\Output\Project.axf" - 0 Error(s), 0 Warning(s).
+```
 
 ### 编译报错 ArmClang: error: unsupported option '--c99'
 
@@ -140,3 +152,9 @@ git clone https://gitee.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
     烧录
 
 ![alt text](doc/img/jflashprogram.png)
+
+# 常见问题
+
+## 编译失败
+
+可能会出现编译失败问题，目前主要原因为芯片型号选择错误，请选择正确的芯片型号，固定型号为：STM32F103CB
