@@ -1,0 +1,13 @@
+name: Repository evidence
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate-project-and-artifacts:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate project, documentation and historical artifacts
+        run: python3 tools/validate_repository.py

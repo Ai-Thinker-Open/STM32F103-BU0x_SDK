@@ -1,0 +1,14 @@
+* text=auto
+*.c text eol=lf
+*.h text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.uvprojx text eol=lf
+*.s text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.axf binary
+*.hex text eol=crlf
+*.lib binary

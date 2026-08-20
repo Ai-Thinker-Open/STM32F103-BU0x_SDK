@@ -1,139 +1,74 @@
-# 简介
+[![中文](https://img.shields.io/badge/中文-README-blue)](README.zh.md)
 
-BU03-Kit 是由深圳市安信可科技有限公司开发的一款 UWB 开发板。该开发板是基
-于 BU03 收发模组，搭载一颗 ST 主控设计而成的一款测试评估板。其上的 BU03 模组
-集成了板载天线，RF 电路，电源管理。 BU03-Kit 可以用于双向测距或 TDOA 定位系
-统中，定位精度可达到 10 厘米，并支持高达 6.8 Mbps 的数据速率。可广泛应用于物
-联网(IoT)、移动设备、可穿戴电子设备、智能家居等领域。如需开放所有代码，请联系安信可官方：<https://www.ai-thinker.com/>
+# STM32F103 BU03/BU04 UWB SDK
 
-## **温馨提示：** STM32F103-BU0x_SDK 只适用于安信可BU03或BU04系列模组或开发板
+This repository contains firmware for the Ai-Thinker BU03-Kit/BU04 family. The board combines an STM32F103T8 host MCU with a BU03 or BU04 ultra-wideband module and supports two-way ranging (TWR), PDoA-related operation, DS-TWR with STS-SDC, and standalone Decawave examples.
 
-### 更多教程请参考：[UWB 使用指南](https://fcniufr8ibx1.feishu.cn/wiki/space/7454451041846034460?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)
+> Target correction: the checked-in Keil project is configured for **STM32F103T8**, with 64 KiB Flash and 20 KiB RAM. The former README reference to STM32F103CB contradicted the project, RTE device directory, and flashing instructions.
 
-# 芯片架构
+## Technical navigation
 
-![alt text](doc/img/chip.png)
+- [Code entry and operating modes](docs/CODE_ENTRY.md)
+- [Architecture and component boundaries](docs/ARCHITECTURE.md)
+- [Build and artifact evidence](docs/VALIDATION.md)
 
-# 目录结构
+## Repository layout
 
-| 文件夹| 描述 | 备注 |
-| :-----------: | :---: | :---: |
-| components         |  组件             | /|
-| components/app     | 应用程序          | /   |
-| doc                | 直到文档和图片     | /    |
-| components/hal     | 驱动库            | / |
-| components/main    | 入口函数          | /   |
-| components/Examples | 示例例程 | / |
-| projects           | 工程文档          | / |
+| Path | Purpose |
+| --- | --- |
+| `Components/Main` | Reset-to-application entry and interrupt handlers |
+| `Components/APP` | AT commands, configuration persistence, USB/UART command handling |
+| `Components/HAL` | Board drivers, DW3000-family driver, OLED, LIS2DH12 and USB support |
+| `Components/Examples` | Eleven selectable UWB examples |
+| `Projects/USER` | Keil µVision project, RTE device files, historical build outputs |
+| `doc/img` | Keil and J-Flash screenshots |
 
-# 环境搭建
+## Build with Keil MDK
 
-使用Windows平台来搭建开发环境。
+1. Install Keil MDK with the legacy ARM Compiler 5 toolchain required by this project.
+2. Install ARM CMSIS 5.6.0 and Keil STM32F1xx DFP 2.4.1, or compatible packs after validating the generated firmware.
+3. Open `Projects/USER/Project.uvprojx`.
+4. Confirm the selected device is `STM32F103T8` and rebuild target `Project`.
+5. Inspect the complete build log; do not rely only on the presence of the checked-in HEX file.
 
-## keil mdk 下载
+The project was last recorded as built with µVision 5.25.2 and ARMCC 5.06 update 6. Four supplied libraries (`aitcmd.lib`, `os.lib`, `pdoa.lib`, and `twr.lib`) contain precompiled ARM objects, so GNU Arm is not claimed as a supported replacement toolchain.
 
-Keil MDK（Microcontroller Development Kit）是一个用于开发基于 ARM Cortex-M 系列微控制器的综合集成开发环境（IDE）。它包含代码编辑、编译、调试等工具，主要用于嵌入式系统开发。建议前去官方网站下载最新版本的mdk-arm:**<https://www.keil.com/download/product/>**
+## Normal firmware mode
 
-![alt text](doc/img/keilmdk.png)
+`EXAMPLE_DEMO` defaults to `0`. After board and application initialization, the firmware loads persistent configuration and selects:
 
-## keil mdk 安装完成
+- TWR/PDoA mode: Node (`role=1`) calls `node_start()`; Tag (`role=0`) calls `tag_start()`.
+- DS-TWR STS-SDC mode: responder (`role=1`) or initiator (`role=0`).
+- Command work mode: continuously services USB and USART AT commands.
 
-Keil MDK 安装完成后，用户将获得一个功能齐全的集成开发环境（IDE），用于开发基于 ARM Cortex-M 微控制器的嵌入式应用程序。
+Configuration is controlled through the AT command implementation in `Components/APP/cmd_fn.c`. Use unique addresses and calibrate UWB antenna delays for the actual hardware; the examples contain development defaults that are not production calibration data.
 
-![](doc/img/keil_v5.PNG)
+## Selectable examples
 
-## stm32f1 keil扩展包 下载
+Set `EXAMPLE_DEMO` to `1` in `Components/Examples/examples/examples_info/examples_defines.h`, then enable exactly one example macro in `Components/HAL/DW/twr_pdoa/inc/example_selection.h`. Available examples cover device-ID read, simple TX/RX, PDoA TX/RX, TX/wait-response, interrupt response, RX/send-response, DS-TWR STS-SDC initiator/responder, and timed sleep.
 
-STM32F1 Keil 扩展包是用于支持 STM32F1 系列微控制器的 Keil MDK 软件包，帮助开发人员在 Keil 环境中轻松开发基于 STM32F1 的嵌入式应用。扩展包包含设备相关的启动代码、驱动程序、示例代码以及其他开发资源。建议前去官方网站下载最新版本的扩展包:**<https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/boards/>**
+## Flashing
 
-![alt text](doc/img/keilpack.png)
+The project generates `Projects/USER/Output/Project.hex`. It can be programmed with a correctly configured Keil/ST-Link or J-Flash workflow. Select the actual STM32F103T8 target and verify supply voltage, SWD connection, module revision, and flash range before programming.
 
-## stm32f1 keil扩展包 安装
+## Validation and limitations
 
-STM32F1的Keil扩展包安装是STM32微控制器开发过程中的一个重要步骤，它允许开发者在Keil MDK-ARM这一集成开发环境（IDE）中方便地开发、编译和调试基于STM32F1系列微控制器的应用程序。
+Run the repository/artifact checks with:
 
-## SDK 克隆
-
-### Github
-
-```
-git clone https://github.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
-```
-
-### Gitee
-
-```
-git clone https://gitee.com/Ai-Thinker-Open/STM32F103-BU0x_SDK.git
+```bash
+python3 tools/validate_repository.py
 ```
 
-## SDK 打开
+The checked-in ARM ELF and Intel HEX are mutually consistent, and their associated historical ARMCC build log reports zero errors and zero warnings. This is **historical artifact evidence**, not a fresh rebuild. The current maintenance environment does not contain licensed ARMCC 5 or the required Keil packs. No flashing, UWB ranging, PDoA, antenna calibration, RF, USB/UART, power, or regulatory test was performed.
 
-找到拉下来的工程，在\Projects\USER目录下面找到Project.uvprojx文件双击打开工程
+## Licensing boundary
 
-![alt text](doc/img/keilopen.png)
+The repository has no root-level license. Several Decawave/Qorvo-derived files and precompiled libraries carry their own notices or restricted terms. “Open repository” does not automatically grant unrestricted redistribution or product-use rights; review every applicable component notice before reuse.
 
-## SDK 编译
+## Resources
 
-点击下图中的 **第2个**按钮 `Rebuil` 重新编译即可。
-
-![!\[\](doc/img/projectbuild.png)](doc/img/keilbuild.png)
-
-### 编译成功示例
-
-```
-... other log
-compiling stm32f10x_tim.c...
-compiling stm32f10x_wwdg.c...
-compiling system_stm32f10x.c...
-linking...
-Program Size: Code=65980 RO-data=4304 RW-data=5196 ZI-data=7596  
-FromELF: creating hex file...
-".\Output\Project.axf" - 0 Error(s), 0 Warning(s).
-```
-
-## 程序烧录
-
-    程序烧录有多种方式，比如：keil烧录、ST link烧录、j-flash烧录等等等。这里选用j-flash烧录介绍。
-
-### j-flash 下载
-
-    JFlash 是 Segger 公司开发的一款用于编程和调试嵌入式系统闪存的工具软件，常用于对各种微控制器和存储器进行固件编程。
-    建议前去官方网站下载对应版本的烧录软件:**<https://www.segger.com/downloads/jlink/>**
-
-![alt text](doc/img/jflash.png)
-
-### j-flash 安装
-
-    对下载的jflash进行安装，安装完成之后的j-flash界面。
-
-![alt text](doc/img/jflashopen.png)
-
-### 打开j-flash lite软件
-
-    打开j-flash lite软件
-
-![alt text](doc/img/jflashlite.png)
-
-### j-flash lite 选择STM32F103T8芯片
-
-    选择stm32f103t8芯片
-
-![alt text](doc/img/jflashstm32f103t8.png)
-
-### j-flash lite 加载烧录文件
-
-    加载烧录文件
-
-![alt text](doc/img/jflashloadprogram.png)
-
-### j-flash lite 烧录
-
-    烧录
-
-![alt text](doc/img/jflashprogram.png)
-
-# 常见问题
-
-## 编译失败
-
-可能会出现编译失败问题，目前主要原因为芯片型号选择错误，请选择正确的芯片型号，固定型号为：STM32F103CB
+- [Ai-Thinker website](https://www.ai-thinker.com/)
+- [UWB usage guide](https://fcniufr8ibx1.feishu.cn/wiki/space/7454451041846034460?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)
+- [Keil MDK](https://www.keil.com/download/product/)
+- [Keil STM32F1 device pack](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/boards/)
+- [SEGGER J-Link/J-Flash](https://www.segger.com/downloads/jlink/)
